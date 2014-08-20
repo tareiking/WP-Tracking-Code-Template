@@ -67,6 +67,9 @@ if (!class_exists('Sennza_Tracking_Code_Template')) {
 			// Footer Codes
 			add_action( 'wp_footer', array( $this, 'enqueue_footer_code' ) );
 
+			// ACF Location filter example
+			// add_filter( 'stct_display_options', array( $this, 'change_acf_location') );
+
 		}
 
 		/**
@@ -156,6 +159,25 @@ if (!class_exists('Sennza_Tracking_Code_Template')) {
 			endif;
 
 		}
+
+		/**
+		 * Change the ACF location array which controls visibility
+		 *
+		 * This example shows meta boxes on all pages.
+		 */
+		function change_acf_location( $acf_location ) {
+
+			$acf_location =	array (
+							'param' => 'post_type',
+							'operator' => '==',
+							'value' => 'post',
+							'order_no' => 0,
+							'group_no' => 0,
+						);
+
+			return $acf_location;
+		}
+
 	}
 }
 
