@@ -25,6 +25,17 @@
  */
 
 if ( function_exists( "register_field_group" ) ) {
+
+	$default_location =	array (
+					'param' => 'page_template',
+					'operator' => '==',
+					'value' => 'tracking-code.php',
+					'order_no' => 0,
+					'group_no' => 0,
+				);
+
+	$locations = apply_filters( 'stct_display_options' , $default_location );
+
 	register_field_group(array (
 		'id' => 'acf_conversion-codes',
 		'title' => 'Conversion Codes',
@@ -54,17 +65,8 @@ if ( function_exists( "register_field_group" ) ) {
 				'formatting' => 'html',
 			),
 		),
-		'location' => array (
-			array (
-				array (
-					'param' => 'page_template',
-					'operator' => '==',
-					'value' => 'tracking-code.php',
-					'order_no' => 0,
-					'group_no' => 0,
-				),
-			),
-		),
+		'location' => array( array ( $locations ) ),
+
 		'options' => array (
 			'position' => 'normal',
 			'layout' => 'meta_box',
