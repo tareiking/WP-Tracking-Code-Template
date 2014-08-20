@@ -19,24 +19,33 @@ WordPress plugin designed to add a page template named **Tracking Code*** where 
 Example:
 
 ```
-		/**
-		 * Change the ACF location array which controls visibility
-		 *
-		 * This example shows meta boxes on all pages.
-		 */
-		function show_tracking_code_on_pages( $acf_location ) {
+/**
+ * Change the ACF location array which controls visibility
+ *
+ * This example shows meta boxes on all pages.
+ */
+function show_tracking_code_on_pages( $acf_location ) {
 
-			$acf_location =	array (
-							'param' => 'post_type',
-							'operator' => '==',
-							'value' => 'page',
-							'order_no' => 0,
-							'group_no' => 0,
-						);
+	$acf_location =	array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'page',
+					'order_no' => 0,
+					'group_no' => 0,
+				);
 
-			return $acf_location;
-		}
+	return $acf_location;
+}
 
-		add_filter( 'stct_display_options', show_tracking_code_on_pages );
+add_filter( 'stct_display_options', show_tracking_code_on_pages );
 ```
 
+```stct_use_template```
+
+Toggles whether or not to use the embedded tracking code template
+
+Example:
+
+```
+add_filter( 'stct_use_template', __return_false() );
+```

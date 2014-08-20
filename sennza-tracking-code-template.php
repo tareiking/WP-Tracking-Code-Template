@@ -43,20 +43,33 @@ if (!class_exists('Sennza_Tracking_Code_Template')) {
 		 */
 		private function __construct() {
 
-			$this->templates = array();
+			$use_template = true;
 
-			// Add a filter to the attributes metabox to inject template into the cache.
-			add_filter('page_attributes_dropdown_pages_args', array( $this, 'register_project_templates' ) );
+			/**
+			 * stct_use_template filter
+			 *
+			 * Enable usage of tracking-code.php template within plugin
+			 *
+			 * Usage: add_filter( 'stct_use_template', __return_false() );
+			 */
+			if ( apply_filters( 'stct_use_template', $use_template ) ) {
 
-			// Add a filter to the save post to inject out template into the page cache
-			add_filter('wp_insert_post_data', array( $this, 'register_project_templates' ) );
+				$this->templates = array();
 
-			// Add a filter to the template include to determine if the page has our
-			// template assigned and return it's path
-			add_filter('template_include', array( $this, 'view_project_template' ) );
+				// Add a filter to the attributes metabox to inject template into the cache.
+				add_filter('page_attributes_dropdown_pages_args', array( $this, 'register_project_templates' ) );
 
-			// Add your templates to this array.
-			$this->templates = array( 'tracking-code.php' => 'Tracking Code Template', );
+				// Add a filter to the save post to inject out template into the page cache
+				add_filter('wp_insert_post_data', array( $this, 'register_project_templates' ) );
+
+				// Add a filter to the template include to determine if the page has our
+				// template assigned and return it's path
+				add_filter('template_include', array( $this, 'view_project_template' ) );
+
+				// Add your templates to this array.
+				$this->templates = array( 'tracking-code.php' => 'Tracking Code Template', );
+
+			}
 
 			// Add ACF to theme setup
 			add_filter( 'after_setup_theme', array( $this, 'load_acf' ) );
