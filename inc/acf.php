@@ -70,14 +70,7 @@ if ( function_exists( "register_field_group" ) ) {
 		'options' => array (
 			'position' => 'normal',
 			'layout' => 'meta_box',
-			'hide_on_screen' => array (
-				0 => 'excerpt',
-				1 => 'custom_fields',
-				2 => 'discussion',
-				3 => 'comments',
-				4 => 'revisions',
-				5 => 'author',
-			),
+			'hide_on_screen' => array (),
 		),
 		'menu_order' => 0,
 	) ) ;
